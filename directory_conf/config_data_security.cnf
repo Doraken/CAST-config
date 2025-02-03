@@ -1,0 +1,142 @@
+#!/bin/bash
+################################################################################
+# Script Name:    config_data_security.cnf   
+# Description:     
+# Author:         Arnaud Crampet 
+# Version:        1.0
+#
+# Notes:          
+#
+# Functions:    
+#
+# Variables:
+#
+# Known Issues:   
+#
+#
+################################################################################
+
+################################################################################
+# Script Name:    config_data_security.cnf
+# Description:    Configuration script for data security paths and directories
+# Author:         Arnaud Crampet
+# Version:        1.0
+#
+# Notes:          Ensure all directory paths are correct and accessible.
+#
+# Functions:      
+# - set_path_data_security()
+# - set_path_data_security_pki_computer()
+# - set_path_data_security_pki_user()
+#
+# Variables:
+#   - BDir_Data_Security
+#   - BDir_Data_Security_pki
+#   - BDir_Data_Security_pki_bin
+#   - BDir_Data_Security_pki_configuration
+#   - BDir_Data_Security_pki_lib
+#   - BDir_Data_Security_pki_root_ac
+#   - BDir_Data_Security_pki_deleg_ac
+#   - BDir_Data_Security_pki_cert_web
+#   - BDir_Data_Security_pki_cert_computer
+#   - BDir_Data_Security_pki_cert_application
+#   - BDir_Data_Security_pki_cert_user
+#   - BDir_Data_Security_pki_cert_computer_server
+#   - BDir_Data_Security_pki_cert_computer_workstation
+#   - BDir_Data_Security_pki_cert_user_authentication
+#   - BDir_Data_Security_pki_cert_user_signin
+#
+# Known Issues:   No known issues as of the current version.
+################################################################################
+
+
+function set_path_data_security ()
+{
+############ STACK_TRACE_BUILDER #####################
+Function_Name="${FUNCNAME[0]}"
+Function_PATH="${Function_PATH}/${Function_Name}"
+######################################################
+
+ #|# [BDir_Data_GIT] define Directory for git files
+ BDir_Data_Security="${Base_Dir_Data}/security"                                   ###_ DIR_To_CHECK
+
+ #|# [BDir_Data_GIT] define Directory for git files
+ BDir_Data_Security_pki_bin="${BDir_Data_Security}/bin"                           ###_ DIR_To_CHECK
+
+ #|# [BDir_Data_GIT] define Directory for git files
+ BDir_Data_Security_pki_configuration="${BDir_Data_Security}/configuration"       ###_ DIR_To_CHECK
+
+ #|# [BDir_Data_GIT] define Directory for git files
+ BDir_Data_Security_pki="${BDir_Data_Security}/pki"                               ###_ DIR_To_CHECK
+
+ #|# [BDir_Data_Security_pki_root] define Directory for git files
+ BDir_Data_Security_pki_root_ac="${BDir_Data_Security_pki}/root-ac"                   ###_ DIR_To_CHECK
+
+ #|# [BDir_Data_Security_pki_deleg] define Directory for git files
+ BDir_Data_Security_pki_deleg_ac="${BDir_Data_Security_pki}/delagated-ac"             ###_ DIR_To_CHECK
+
+ #|# [BDir_Data_Security_pki_cert_web] define Directory for git files
+ BDir_Data_Security_pki_cert_web="${BDir_Data_Security_pki}/cert-web"                 ###_ DIR_To_CHECK
+
+ #|# [BDir_Data_Security_pki_cert_computer] define Directory for git files
+ BDir_Data_Security_pki_cert_computer="${BDir_Data_Security_pki}/cert-computer"       ###_ DIR_To_CHECK
+
+ #|# [BDir_Data_Security_pki_cert_server] define Directory for servers certificates
+ BDir_Data_Security_pki_cert_server="${BDir_Data_Security_pki}/cert-server"       ###_ DIR_To_CHECK
+
+ printf  "${GLB_PRINTCOL_4}" "loading default data  directory" ": [" "pki computer directory" "]"
+ set_path_data_security_pki_computer
+
+ #|# [BDir_Data_Security_pki_cert_application] define Directory for git files
+ BDir_Data_Security_pki_cert_application="${BDir_Data_Security_pki}/cert-application" ###_ DIR_To_CHECK
+
+ #|# [BDir_Data_Security_pki_cert_user] define Directory for git files
+ BDir_Data_Security_pki_cert_user="${BDir_Data_Security}/cert-user"               ###_ DIR_To_CHECK
+
+ printf  "${GLB_PRINTCOL_4}" "loading default data  directory" ": [" "pki user directory" "]"
+ set_path_data_security_pki_user
+
+############### Stack_TRACE_BUILDER ################
+Function_PATH="$( dirname ${Function_PATH} )"
+#################################################### 
+}
+
+function set_path_data_security_pki_computer ()
+{
+############ STACK_TRACE_BUILDER #####################
+Function_Name="${FUNCNAME[0]}"
+Function_PATH="${Function_PATH}/${Function_Name}"
+######################################################
+
+   #|# [BDir_Data_GIT] define Directory for git files
+   BDir_Data_Security_pki_cert_computer_server="${BDir_Data_Security_pki_cert_computer}/cert-server"           ###_ DIR_To_CHECK
+
+   #|# [BDir_Data_GIT] define Directory for git files
+   BDir_Data_Security_pki_cert_computer_workstation="${BDir_Data_Security_pki_cert_computer}/cert-workstation" ###_ DIR_To_CHECK
+
+############### Stack_TRACE_BUILDER ################
+Function_PATH="$( dirname ${Function_PATH} )"
+#################################################### 
+}
+
+function set_path_data_security_pki_user ()
+{
+############ STACK_TRACE_BUILDER #####################
+Function_Name="${FUNCNAME[0]}"
+Function_PATH="${Function_PATH}/${Function_Name}"
+######################################################
+
+ #|# [BDir_Data_Security_pki_cert_user] define Directory for git files
+ BDir_Data_Security_pki_cert_user_authentication="${BDir_Data_Security_pki_cert_user}/cert-authentication"  ###_ DIR_To_CHECK
+
+ #|# [BDir_Data_Security_pki_cert_user] define Directory for git files
+ BDir_Data_Security_pki_cert_user_signin="${BDir_Data_Security_pki_cert_user}/cert-signin"                  ###_ DIR_To_CHECK
+
+############### Stack_TRACE_BUILDER ################
+Function_PATH="$( dirname ${Function_PATH} )"
+#################################################### 
+}
+
+
+# Sourcing control variable 
+ConfigState="OK"  

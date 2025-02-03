@@ -1,0 +1,37 @@
+###############################################################################
+# config_azure_neutral.cnf                                                       
+#                                                                           
+# Creation Date : 12/08/2025       
+# Team          : bomzai     
+# Support mail  : arnaud.crampet@bomzai.com           
+# Author        : Arnaud Crampet
+# Subject : This file containe all genrics vars used in docker installation   
+###############################################################################
+####
+# INFO
+
+
+azure_subcription_id_neutral="00000000-0000-0000-0000-000000000000"
+azure_tenant_name_neutral="neutral.onmicrosoft.com"
+
+azure_infra_root_neutral="${BDir_Data_Plateformes_Infrastruture_Azure}/azure-tenant-neutral"
+azure_infra_rg_root_neutral=${azure_infra_root_neutral}/rg_root
+GIT_BASE_SSH_URL_neutral="ssh.${GIT_BASE_DNS}"
+GIT_BASE_ORGA_NAME_neutral="neutral-infra-azure"
+git_glb_project_neutral="azure-tenant"
+
+
+function set_azure_tenant_config_neutral ()            #__ azure_tenant_selector
+{
+ azure_subcription_id=${azure_subcription_id_neutral}
+ azure_tenant_name="${azure_tenant_name_neutral}"
+ azure_infra_root="${azure_infra_root_neutral}"
+ azure_infra_rg_root="${azure_infra_rg_root_neutral}"
+ GIT_BASE_SSH_URL="${GIT_BASE_SSH_URL_neutral}"
+ GIT_BASE_ORGA_NAME="${GIT_BASE_ORGA_NAME_neutral}"
+ git_glb_project="${git_glb_project_neutral}"
+}
+
+
+# Sourcing control variable 
+ConfigState="OK"  

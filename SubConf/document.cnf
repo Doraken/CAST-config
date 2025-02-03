@@ -1,0 +1,26 @@
+###############################################################################
+# document.cnf                                         Version : 1.1.2.1      #
+#                                                                             #
+# Creation Date : 18/05/2007                                                  #
+# Team          : Only me after all                                           #
+# Support mail  : doraken@doraken.net                                          #
+# Author        : Arnaud Crampet                                              #
+#                                                                             #
+# Subject : This conf file provide all base parameters for auto documentation #
+#                                                                             #
+###############################################################################
+####
+# INFO
+function Set_catalog_files ()
+{
+Base_Catalog_function="${BDir_Tmp_Catalogs}/function.cat"                  # Is_A_Catalog_FLAG
+Base_Catalog_function_depend="${BDir_Tmp_Catalogs}/function_deps.cat"      # Is_A_Catalog_FLAG
+Base_Catalog_function_docs="${BDir_Tmp_Catalogs}/function_docs.cat"        # Is_A_Catalog_FLAG
+Base_Catalog_function_TMP_dep="${BDir_Tmp_Catalogs}/function_tmp_dep.cat"  # Is_A_Catalog_FLAG
+Base_Catalog_function_Final="${BDir_Tmp_Catalogs}/Final_function_deps.cat" # Is_A_Catalog_FLAG
+TOPrintFormat="XML"
+}
+
+
+# Sourcing control variable 
+ConfigState="OK"

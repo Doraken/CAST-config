@@ -1,0 +1,279 @@
+#!/bin/bash
+#############
+# Author  :  Arnaud Crampet 
+# Date    :  25/06/2024
+# Determine the current directory of the script
+DEBUG_STATE="0"
+current_date="$(date +"%Y_%m_%d-%H-%M-%S")"
+GLB_PRINTCOL_4="%-70s %-1s %-2s %-2s\n"
+GLB_PRINTCOL_2_NE="%-100s %-10s"
+GLB_PRINTCOL_1_NE="%-150s %-10s\n"
+Base_Dir_Scripts=$(dirname "$(realpath "$0")")
+Runned="0"
+init_azure_devops="0"
+GLB_default_package_manager="apt"
+
+#### create somme array for bug sourcing please be sure that all liste array are declared here before populaties them
+declare -A COUNTRIES=()
+#AZure object type
+declare -A AZURE_OBJECTS=()
+# Azure objet acégories
+declare -A CATEGORIES=()
+# enviroment categories
+declare -A ENVIRONMENTS_AZ=()
+
+# Add menu array declaration 
+declare -A Selected_Menu_items=()
+declare -a Selected_Menu_items_index=()
+
+function Get_all_sub_config ()
+{
+local _local_conf_dir="${1}"
+for config in $(find  ${_local_conf_dir} -type f -name "*.cnf" ) 
+     do 
+       MSG_DISPLAY "check" "0" "sourcing configuration file ${config} "
+       . ${config}
+       if [[ ${ConfigState} = "OK" ]]
+          then 
+              echo " : [ SUCESS ] "
+              ConfigState=""
+          else 
+              echo " : [ ERROR  ] "
+              echo " must check ./log/default.log " 
+              exit 1  
+        fi 
+done 
+}
+
+# Define paths based on the current directory
+function set_paths () 
+{
+############ STACK_TRACE_BUILDER #####################
+Function_Name="${FUNCNAME[0]}"
+Function_PATH="${Function_Name}"
+######################################################
+    set_bpath
+    #|# [Base_Dir_Scripts_Bin] define Directory for executable scripts
+    Base_Dir_Scripts_Bin="${Base_Dir_Scripts}/bin"                   ###_ DIR_To_CHECK
+    printf "${GLB_PRINTCOL_4}" "default bin directory set to" ": [" "${Base_Dir_Scripts_Bin}" "]"
+
+    #|# [Base_Dir_Scripts_Lib] define Directory for library scripts
+    Base_Dir_Scripts_Lib="${Base_Dir_Scripts}/lib"                   ###_ DIR_To_CHECK
+    printf "${GLB_PRINTCOL_4}" "default lib directory set to" ": [" "${Base_Dir_Scripts_Lib}" "]"
+    
+    #|# [Base_Dir_Scripts_CNF] define Directory for configuration files
+    Base_Dir_Scripts_CNF="${Base_Dir_Scripts}/config"                   ###_ DIR_To_CHECK
+    printf "${GLB_PRINTCOL_4}" "default configuration directory set to" ": [" "${Base_Dir_Scripts_CNF}" "]"
+    
+    #|# [Base_Dir_Scripts_CNF_Dir] define Directory for specific configuration files
+    Base_Dir_Scripts_CNF_Dir="${Base_Dir_Scripts_CNF}/directory_conf" ###_ DIR_To_CHECK
+    
+    source_sub_config "${Base_Dir_Scripts_CNF_Dir}"
+
+    #|# [Base_Dir_Scripts_Bin] define Directory for executable scripts
+    Base_Dir_Scripts_cred="${Base_Dir_Scripts}/.cred"                 ###_ DIR_To_CHECK
+    printf "${GLB_PRINTCOL_4}" "default bin directory set to" ": [" "${Base_Dir_Scripts_cred}" "]"
+
+    #|# [Base_Dir_Scripts_CNF_spec] define Directory for special configuration files
+    Base_Dir_Scripts_CNF_spec="${Base_Dir_Scripts_CNF}/special_conf"  ###_ DIR_To_CHECK
+
+    source_sub_config "${Base_Dir_Scripts_CNF_spec}"
+
+    #|# [Base_Dir_Scripts_CNF_Subs] define Directory for sub-configuration files
+    Base_Dir_Scripts_CNF_Subs="${Base_Dir_Scripts_CNF}/SubConf"       ###_ DIR_To_CHECK
+    
+    source_sub_config "${Base_Dir_Scripts_CNF_Subs}" 
+
+    #|# [Base_Dir_Scripts_LOG] define Directory for log files
+    Base_Dir_Scripts_LOG="${Base_Dir_Scripts}/logs"                   ###_ DIR_To_CHECK_TMP
+    printf  "${GLB_PRINTCOL_4}" "default log directory set to" ": [" "${Base_Dir_Scripts_LOG}" "]"
+   
+    #|# [Base_Dir_Data] define Main directory for data files
+    Base_Dir_Data="${Base_Dir_Scripts}/data"                          ###_ DIR_To_CHECK_TMP
+    printf  "${GLB_PRINTCOL_4}" "default data directory set to" ": [" "${Base_Dir_Data}" "]"
+
+    #|# [Base_Dir_Scripts_BCK] define Directory for backup files
+    Base_Dir_Scripts_BCK="${Base_Dir_Data}/backup"                 ###_ DIR_To_CHECK_TMP
+    printf  "${GLB_PRINTCOL_4}" "default beckup directory set to" ": ["  "${Base_Dir_Scripts_BCK}" "]"
+
+    printf  "${GLB_PRINTCOL_4}" "loading default data  directory" ": [" "definitions directory" "]"
+    set_path_data_defs
+
+    printf  "${GLB_PRINTCOL_4}" "loading default data  directory" ": [" "platformes directory" "]"
+    set_path_data_plateformes
+
+    printf  "${GLB_PRINTCOL_4}" "loading default data  directory" ": [" "security directory" "]"
+    set_path_data_security
+    
+    printf  "${GLB_PRINTCOL_4}" "loading default data  directory" ": [" "system directory" "]"
+    set_path_data_system
+
+    #|# [BDir_Data_GIT] define Directory for git files
+    BDir_Data_GIT="${Base_Dir_Data}/git" ###_ DIR_To_CHECK
+    
+    #|# [BDir_Tmp] define Directory for temporary files
+    BDir_Tmp="${Base_Dir_Data}/tmp"                            ###_ DIR_To_CHECK_TMP
+    printf  "${GLB_PRINTCOL_4}" "default tmp directory set to" ": ["  "${Base_Dir_Scripts_CNF}" "]"
+   
+    printf  "${GLB_PRINTCOL_4}" "loading default data  directory" ": [" "tmp directory" "]"
+    Set_path_tmp
+    
+    printf  "${GLB_PRINTCOL_4}" "loading default data  directory" ": [" "data store directory" "]"
+    Set_path_data_store
+    
+    #|# [BDir_Data_Security_pki_certificate_server] define Directory for server certificates
+    BDir_Data_Security_pki_certificate_server="${BDir_Data_Security_pki}/servers" ###_ DIR_To_CHECK_TMP 
+    set_vars_env
+    get_resources
+    load_core_lib
+    init_all
+############### Stack_TRACE_BUILDER ################
+Function_PATH="$( dirname ${Function_PATH} )"
+####################################################
+}    
+
+# check and set path directory for conf files
+function set_bpath ()
+{
+############ STACK_TRACE_BUILDER #####################
+Function_Name="${FUNCNAME[0]}"
+Function_PATH="${Function_Name}"
+######################################################
+    if [[ ${Runned} -ge 2  ]]
+        then 
+            printf "Error during path configuration "
+            printf "${GLB_PRINTCOL_4}" "default base directory set to" ": [" "${Base_Dir_Scripts}" "]"
+            exit 1
+        else 
+            if [[ ! -d ${Base_Dir_Scripts}/config ]] 
+                then 
+                    Base_Dir_Scripts=$(dirname  ${Base_Dir_Scripts}   )
+                    Runned=$(expr ${Runned} + 1 )
+                    set_bpath
+                else 
+                    printf "${GLB_PRINTCOL_4}" "default base directory set to" ": [" "${Base_Dir_Scripts}" "]"
+            fi 
+    fi
+############### Stack_TRACE_BUILDER ################
+Function_PATH="$( dirname ${Function_PATH} )"
+####################################################
+}
+
+# source and check configuration files in the config folder
+function source_sub_config () 
+{
+############ STACK_TRACE_BUILDER #####################
+Function_Name="${FUNCNAME[0]}"
+Function_PATH="${Function_PATH}/${Function_Name}"
+######################################################
+    # Source the configuration file if available
+    local _congig_dir="${1}"
+    ConfigState=""
+    for configuration_file in $(ls ${_congig_dir}/*.cnf -1)
+    do 
+            if [[ -f ${configuration_file}  ]]
+                then 
+                    . ${configuration_file}  2> /dev/null  
+                    if [[ ${ConfigState} = "OK" ]]
+                        then 
+                            printf "${GLB_PRINTCOL_4}" "Sourcing base configuration file ${configuration_file}" ": [" "SUCCESS" "]"
+                            ConfigState=""
+                        else
+                            printf "${GLB_PRINTCOL_4}" "Sourcing base configuration file ${configuration_file} " ": [" "ERROR" "]"
+                            exit 1
+                    fi 
+                else 
+                    printf "${GLB_PRINTCOL_4}" "Sourcing base configuration file ${configuration_file}" ": [" "File NOT FOUND"  "]"
+                    exit 1
+            fi 
+    done 
+ 
+############### Stack_TRACE_BUILDER ################
+Function_PATH="$( dirname ${Function_PATH} )"
+####################################################
+} 
+
+# get ressources from git if path configuration set error
+function get_resources ()
+{
+############ STACK_TRACE_BUILDER #####################
+Function_Name="${FUNCNAME[0]}"
+Function_PATH="${Function_PATH}/${Function_Name}"
+######################################################
+ if [[ ${runned} -ge 2 ]]
+    then 
+        printf "Error during path configuration "
+        printf "${GLB_PRINTCOL_4}" "default base directory set to" ": [" "${Base_Dir_Scripts}" "]"
+        exit 1
+    else 
+        if [[ -d ${Base_Dir_Scripts_Lib} ]]   
+            then 
+                 printf "${GLB_PRINTCOL_4}" "default ressource directory dowload" ": [" "SUCCESS" "]"
+                 runned="0"
+            else 
+                cd ${Base_Dir_Scripts}
+                git clone GIT_BASE_SSH_URL/${GIT_BASE_ORGA_NAME}/${GIT_GLB_PROJECT}/lib
+                runned="$(expr ${runned} + 1 )"
+                get_resources
+        fi 
+fi 
+############### Stack_TRACE_BUILDER ################
+Function_PATH="$( dirname ${Function_PATH} )"
+####################################################
+}
+
+# check and load file core.sh (Very Important File)
+function load_core_lib ()
+{
+############ STACK_TRACE_BUILDER #####################
+Function_Name="${FUNCNAME[0]}"
+Function_PATH="${Function_PATH}/${Function_Name}"
+######################################################
+CoreState=""
+printf  "Sourcing core lib file " 
+if [[ -f ${Base_Dir_Scripts_Lib}/core.sh  ]]
+   then 
+       . ${Base_Dir_Scripts_Lib}/core.sh 2> /dev/null  
+       if [[  ${?} -ge 1 ]] && [[ ! ${CoreState} = "OK" ]]
+          then 
+              printf "                                                : [ ERROR ] \n" 
+              exit 1
+          else
+              printf "                                                : [ SUCCESS ] \n" 
+      fi 
+    else 
+      printf " ERROR FILE NOT FOUND \n"
+fi 
+
+Do_source_all_libs "${Base_Dir_Scripts_Lib}"
+############### Stack_TRACE_BUILDER ################
+Function_PATH="$( dirname ${Function_PATH} )"
+####################################################
+}
+
+GLB_GIT_ressources=${GIT_HTTPS_URL}/lib
+
+# generique connection to Azure DevOps project
+function login_azure ()
+{
+############ STACK_TRACE_BUILDER #####################
+Function_Name="${FUNCNAME[0]}"
+Function_PATH="${Function_PATH}/${Function_Name}"
+######################################################
+
+az login 
+az devops configure --defaults organization=${GIT_BASE_ORGA_NAME} project=${GIT_GLB_PROJECT}
+az account set --subscription "${subscriptionId}"
+
+############### Stack_TRACE_BUILDER ################
+Function_PATH="$( dirname ${Function_PATH} )"
+####################################################
+}
+git config --global init.defaultBranch main
+
+
+# Sourcing control variable 
+ConfigState="OK"
+
+
+

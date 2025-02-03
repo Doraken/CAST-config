@@ -1,0 +1,31 @@
+#!/bin/bash
+#############
+# Author  :  Arnaud Crampet 
+# Date    :  25/06/2024
+# Determine the current directory of the script
+
+GIT_BASE_SSH_URL="git@ssh.${GIT_BASE_DNS}:v3"
+GIT_BASE_ORGA_NAME="bfm-infra-azure"
+GIT_GLB_PROJECT="azure-tenant"
+GIT_HTTPS_URL="https://${GIT_BASE_ORGA_NAME}@${GIT_BASE_DNS}/${GIT_BASE_ORGA_NAME}/${GIT_GLB_PROJECT}/_git/"
+organization=https://${GIT_BASE_DNS}/${GIT_BASE_ORGA_NAME} 
+
+function show_actual_git_config ()
+{
+printf "\n \n"
+printf "#----------------------------------------------------------------------------------------------#\n"
+printf "|------                                git configuration :                              -------|\n"
+printf "#----------------------------------------------------------------------------------------------#\n" 
+printf "${GLB_PRINTCOL_4}" "default ssh url set to" ": [" "${GIT_BASE_SSH_URL}" "]"
+printf "${GLB_PRINTCOL_4}" "default organization set to" ": [" "${GIT_BASE_ORGA_NAME}" "]"
+printf "${GLB_PRINTCOL_4}" "default globale project set to" ": [" "${GIT_GLB_PROJECT}" "]"
+printf "${GLB_PRINTCOL_4}" "default https URL set to" ": [" "${GIT_HTTPS_URL}" "]"
+printf "#----------------------------------------------------------------------------------------------#\n"
+printf "\n \n"
+}
+
+show_actual_git_config
+
+
+# Sourcing control variable 
+ConfigState="OK"

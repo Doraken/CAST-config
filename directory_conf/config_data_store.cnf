@@ -1,0 +1,84 @@
+#!/bin/bash 
+
+function Set_path_data_store ()
+{
+############ STACK_TRACE_BUILDER #####################
+Function_Name="${FUNCNAME[0]}"
+Function_PATH="${Function_PATH}/${Function_Name}"
+######################################################
+
+   #|# [BDir_Data_Xml] define Directory for XML files
+    BDir_Data_Store="${Base_Dir_Data}/store"             ###_ DIR_To_CHECK_TMP
+
+    #|# [BDir_Data_Xml] define Directory for XML files
+    BDir_Data_Xml="${BDir_Data_Store}/xml"               ###_ DIR_To_CHECK_TMP
+     
+    #|# [BDir_Data_Web] define Directory for web files
+    BDir_Data_Web="${BDir_Data_Store}/web"               ###_ DIR_To_CHECK
+    
+    #|# [BDir_Data_Web_Php] define Directory for PHP web files
+    BDir_Data_Web_Php="${BDir_Data_Store}/php"           ###_ DIR_To_CHECK
+    
+    #|# [BDir_Data_Web_Html] define Directory for HTML web files
+    BDir_Data_Web_Html="${BDir_Data_Store}/html"         ###_ DIR_To_CHECK
+    
+    #|# [BDir_Data_Doc] define Directory for documentation files
+    BDir_Data_Doc="${BDir_Data_Store}/doc"               ###_ DIR_To_CHECK_TMP
+    
+    printf  "${GLB_PRINTCOL_4}" "loading default data  directory" ": [" "documentation directory" "]"
+    Set_path_data_store_doc
+    
+    #|# [BDir_Data_Reports] define Directory for report files
+    BDir_Data_Reports="${Base_Dir_Data}/reports"         ###_ DIR_To_CHECK_TMP
+    
+    printf  "${GLB_PRINTCOL_4}" "loading default data  directory" ": [" "report directory" "]"
+    Set_path_data_store_report
+
+############### Stack_TRACE_BUILDER ################
+Function_PATH="$( dirname ${Function_PATH} )"
+#################################################### 
+}
+
+
+function Set_path_data_store_doc () 
+{
+############ STACK_TRACE_BUILDER #####################
+Function_Name="${FUNCNAME[0]}"
+Function_PATH="${Function_PATH}/${Function_Name}"
+######################################################
+
+    #|# [BDir_Data_doc_xml] define Directory for XML documentation files
+    BDir_Data_doc_xml="${BDir_Data_Doc}/xml"             ###_ DIR_To_CHECK_TMP
+    
+    #|# [BDir_Data_doc_txt] define Directory for text documentation files
+    BDir_Data_doc_txt="${BDir_Data_Doc}/txt"             ###_ DIR_To_CHECK_TMP
+    
+    #|# [BDir_Data_doc_man_html] define Directory for HTML manual files
+    BDir_Data_doc_man_html="${BDir_Data_Doc}/man-html"   ###_ DIR_To_CHECK_TMP 
+
+############### Stack_TRACE_BUILDER ################
+Function_PATH="$( dirname ${Function_PATH} )"
+#################################################### 
+}
+
+function Set_path_data_store_report ()
+{
+############ STACK_TRACE_BUILDER #####################
+Function_Name="${FUNCNAME[0]}"
+Function_PATH="${Function_PATH}/${Function_Name}"
+######################################################
+
+    #|# [BDir_Data_Reports_txt] define Directory for text report files
+    BDir_Data_Reports_txt="${BDir_Data_Reports}/txt"     ###_ DIR_To_CHECK_TMP
+    
+    #|# [BDir_Data_Reports_html] define Directory for HTML report files
+    BDir_Data_Reports_html="${BDir_Data_Reports}/html"   ###_ DIR_To_CHECK_TMP  
+
+############### Stack_TRACE_BUILDER ################
+Function_PATH="$( dirname ${Function_PATH} )"
+#################################################### 
+}
+
+
+# Sourcing control variable 
+ConfigState="OK"

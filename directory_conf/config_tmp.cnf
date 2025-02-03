@@ -1,0 +1,35 @@
+#!/bin/bash 
+
+function Set_path_tmp ()
+{
+############ STACK_TRACE_BUILDER #####################
+Function_Name="${FUNCNAME[0]}"
+Function_PATH="${Function_PATH}/${Function_Name}"
+######################################################
+
+    #|# [BDir_Tmp_Auto_Lib] define Temporary directory for auto library scripts
+    BDir_Tmp_Auto_Lib="${BDir_Tmp}/auto_lib"                     ###_ DIR_To_CHECK_TMP
+    
+    #|# [BDir_Tmp_Fifo] define Temporary directory for FIFO files
+    BDir_Tmp_Fifo="${BDir_Tmp}/fifo"                             ###_ DIR_To_CHECK_TMP
+    
+    #|# [BDir_Tmp_Conf_Rec] define Temporary directory for received config files
+    BDir_Tmp_Conf_Rec="${BDir_Tmp}/conf_file_rec"                ###_ DIR_To_CHECK_TMP
+    
+    #|# [BDir_Tmp_Conf_Gen] define Temporary directory for generated config files
+    BDir_Tmp_Conf_Gen="${BDir_Tmp}/conf_file_gen"                ###_ DIR_To_CHECK_TMP
+
+    #|# [BDir_Tmp_Catalogs] define Directory for catalog files
+    BDir_Tmp_Catalogs="${BDir_Tmp}/catalogue"                    ###_ DIR_To_CHECK
+
+    #|# [BDir_Data_Get_From_PF] define Directory for pulled data files
+    BDir_Data_Get_From_PF="${BDir_Tmp}/pull"                     ###_ DIR_To_CHECK_TMP
+
+############### Stack_TRACE_BUILDER ################
+Function_PATH="$( dirname ${Function_PATH} )"
+#################################################### 
+}
+
+
+# Sourcing control variable 
+ConfigState="OK"

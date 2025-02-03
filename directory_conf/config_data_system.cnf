@@ -1,0 +1,197 @@
+#!/bin/bash
+
+function set_path_data_system ()
+{
+############ STACK_TRACE_BUILDER #####################
+Function_Name="${FUNCNAME[0]}"
+Function_PATH="${Function_PATH}/${Function_Name}"
+######################################################
+
+ #|# [BDir_Data_System] define Directory for git files
+ BDir_Data_System="${Base_Dir_Data}/system"                                ###_ DIR_To_CHECK
+
+ #|# [BDir_Data_System_bin] define Directory for git files
+ BDir_Data_System_bin="${BDir_Data_System}/bin"                            ###_ DIR_To_CHECK
+ 
+ #|# [BDir_Data_System_config] define Directory for git files
+ BDir_Data_System_config="${BDir_Data_System}/config"                      ###_ DIR_To_CHECK
+ 
+ #|# [BDir_Data_System_lib] define Directory for git files
+ BDir_Data_System_lib="${BDir_Data_System}/lib"    
+ 
+ #|# [BDir_Data_System_dckr_imgs] define Directory for git files
+ BDir_Data_System_dckr_imgs="${BDir_Data_System}/docker-images"             ###_ DIR_To_CHECK
+ 
+ printf  "${GLB_PRINTCOL_4}" "loading default data  directory" ": [" "system Docker directory" "]"
+ Set_path_data_system_dkr
+
+ #|# [BDir_Data_System_Expect] define Directory for expect scripts
+ BDir_Data_System_Expect="${BDir_Data_System}/expect" ###_ DIR_To_CHECK
+
+ printf  "${GLB_PRINTCOL_4}" "loading default data  directory" ": [" "system expect directory" "]"
+ Set_path_data_system_expect  
+
+#|# [BDir_Data_Packages] define Directory for packages
+BDir_Data_Packages="${BDir_Data_System}/packages" ###_ DIR_To_CHECK_TMP
+    
+#|# [BDir_Data_Packages_inits] define Directory for package initialization files
+BDir_Data_Packages_inits="${BDir_Data_Packages}/inits" ###_ DIR_To_CHECK_TMP
+
+############### Stack_TRACE_BUILDER ################
+Function_PATH="$( dirname ${Function_PATH} )"
+#################################################### 
+}   
+
+function Set_path_data_system_expect ()
+{
+############ STACK_TRACE_BUILDER #####################
+Function_Name="${FUNCNAME[0]}"
+Function_PATH="${Function_PATH}/${Function_Name}"
+######################################################
+
+ #|# [BDir_Data_System_Expect_Uploads] define Directory for uploaded expect scripts
+ BDir_Data_System_Expect_Uploads="${BDir_Data_System_Expect}/uploaded_scripts" ###_ DIR_To_CHECK
+    
+ #|# [BDir_Data_System_Expects_cmd] define Directory for expect command scripts
+ BDir_Data_System_Expects_cmd="${BDir_Data_System_Expect}/cmd" ###_ DIR_To_CHECK
+
+############### Stack_TRACE_BUILDER ################
+Function_PATH="$( dirname ${Function_PATH} )"
+#################################################### 
+}
+
+function Set_path_data_system_dkr ()
+{
+############ STACK_TRACE_BUILDER #####################
+Function_Name="${FUNCNAME[0]}"
+Function_PATH="${Function_PATH}/${Function_Name}"
+######################################################
+
+ #|# [BDir_Data_System_dckr_imgs_win] define Directory for git files
+ BDir_Data_System_dckr_imgs_win="${BDir_Data_System_dckr_imgs}/windows"     ###_ DIR_To_CHECK
+
+ #|# [BDir_Data_System_dckr_imgs_win_en] define Directory for git files
+ BDir_Data_System_dckr_imgs_win_en="${BDir_Data_System_dckr_imgs_win}/en"   ###_ DIR_To_CHECK
+
+ printf  "${GLB_PRINTCOL_4}" "loading default data  directory" ": [" "docker windows en directory" "]"
+ Set_path_data_system_dkr_img_win_en
+
+ printf  "${GLB_PRINTCOL_4}" "loading default data  directory" ": [" "docker linux fr directory" "]"
+ Set_path_data_system_dkr_img_win_fr
+
+ #|# [BDir_Data_System_dckr_imgs_lin] define Directory for git files
+ BDir_Data_System_dckr_imgs_lin="${BDir_Data_System_dckr_imgs}/linux"       ###_ DIR_To_CHECK
+
+ printf  "${GLB_PRINTCOL_4}" "loading default data  directory" ": [" "docker linux en directory" "]"
+ Set_path_data_system_dkr_img_lin_en
+
+ printf  "${GLB_PRINTCOL_4}" "loading default data  directory" ": [" "docker linux fr directory" "]"
+ Set_path_data_system_dkr_img_lin_fr
+
+############### Stack_TRACE_BUILDER ################
+Function_PATH="$( dirname ${Function_PATH} )"
+#################################################### 
+}
+
+
+
+
+function Set_path_data_system_dkr_img_win_en ()
+{
+############ STACK_TRACE_BUILDER #####################
+Function_Name="${FUNCNAME[0]}"
+Function_PATH="${Function_PATH}/${Function_Name}"
+######################################################
+
+ #|# [BDir_Data_System_dckr_imgs_win_en] define Directory for git files
+ BDir_Data_System_dckr_imgs_win_en="${BDir_Data_System_dckr_imgs_win}/en"             ###_ DIR_To_CHECK
+
+ #|# [BDir_Data_System_dckr_imgs_win_en_2022] define Directory for git files
+ BDir_Data_System_dckr_imgs_win_en_2022="${BDir_Data_System_dckr_imgs_win_en}/2022"   ###_ DIR_To_CHECK
+
+ #|# [BDir_Data_System_dckr_imgs_win_en_2019] define Directory for git files
+ BDir_Data_System_dckr_imgs_win_en_2019="${BDir_Data_System_dckr_imgs_win_en}/2019"   ###_ DIR_To_CHECK
+
+############### Stack_TRACE_BUILDER ################
+Function_PATH="$( dirname ${Function_PATH} )"
+#################################################### 
+}
+
+function Set_path_data_system_dkr_img_win_fr ()
+{
+############ STACK_TRACE_BUILDER #####################
+Function_Name="${FUNCNAME[0]}"
+Function_PATH="${Function_PATH}/${Function_Name}"
+######################################################
+
+ #|# [BDir_Data_System_dckr_imgs_win_fr] define Directory for git files
+ BDir_Data_System_dckr_imgs_win_fr="${BDir_Data_System_dckr_imgs_win}/fr"             ###_ DIR_To_CHECK
+
+ #|# [BDir_Data_System_dckr_imgs_win_fr_2022] define Directory for git files
+ BDir_Data_System_dckr_imgs_win_fr_2022="${BDir_Data_System_dckr_imgs_win_fr}/2022"   ###_ DIR_To_CHECK
+
+ #|# [BDir_Data_System_dckr_imgs_win_en_2019] define Directory for git files
+ BDir_Data_System_dckr_imgs_win_fr_2019="${BDir_Data_System_dckr_imgs_win_fr}/2019"   ###_ DIR_To_CHECK
+
+############### Stack_TRACE_BUILDER ################
+Function_PATH="$( dirname ${Function_PATH} )"
+#################################################### 
+}
+
+function Set_path_data_system_dkr_img_lin_fr ()
+{
+############ STACK_TRACE_BUILDER #####################
+Function_Name="${FUNCNAME[0]}"
+Function_PATH="${Function_PATH}/${Function_Name}"
+######################################################
+
+ #|# [BDir_Data_System_dckr_imgs_lin] define Directory for git files
+ BDir_Data_System_dckr_imgs_lin_fr="${BDir_Data_System_dckr_imgs_lin}/fr"                       ###_ DIR_To_CHECK
+
+ #|# [BDir_Data_GIT] define Directory for git files
+ BDir_Data_System_dckr_imgs_lin_fr_deb="${BDir_Data_System_dckr_imgs_lin_fr}/debian"            ###_ DIR_To_CHECK
+ 
+ #|# [BDir_Data_GIT] define Directory for git files
+ BDir_Data_System_dckr_imgs_lin_fr_ubuntu="${BDir_Data_System_dckr_imgs_lin_fr}/ubuntu"         ###_ DIR_To_CHECK
+ 
+ #|# [BDir_Data_GIT] define Directory for git files
+ BDir_Data_System_dckr_imgs_lin_fr_alpine="${BDir_Data_System_dckr_imgs_lin_fr}/alpine"         ###_ DIR_To_CHECK
+ 
+ #|# [BDir_Data_GIT] define Directory for git files
+ BDir_Data_System_dckr_imgs_lin_fr_specifics="${BDir_Data_System_dckr_imgs_lin_fr}/specifics"   ###_ DIR_To_CHECK  
+
+############### Stack_TRACE_BUILDER ################
+Function_PATH="$( dirname ${Function_PATH} )"
+#################################################### 
+}
+
+function Set_path_data_system_dkr_img_lin_en ()
+{
+############ STACK_TRACE_BUILDER #####################
+Function_Name="${FUNCNAME[0]}"
+Function_PATH="${Function_PATH}/${Function_Name}"
+######################################################
+
+ #|# [BDir_Data_System_dckr_imgs_lin_en] define Directory for git files
+ BDir_Data_System_dckr_imgs_lin_en="${BDir_Data_System_dckr_imgs_lin}/en"                       ###_ DIR_To_CHECK
+
+ #|# [BDir_Data_System_dckr_imgs_lin_en_deb] define Directory for git files
+ BDir_Data_System_dckr_imgs_lin_en_deb="${BDir_Data_System_dckr_imgs_lin_en}/debian"            ###_ DIR_To_CHECK
+ 
+ #|# [BDir_Data_System_dckr_imgs_lin_en_ubuntu] define Directory for git files
+ BDir_Data_System_dckr_imgs_lin_en_ubuntu="${BDir_Data_System_dckr_imgs_lin_en}/ubuntu"         ###_ DIR_To_CHECK
+ 
+ #|# [BDir_Data_System_dckr_imgs_lin_en_alpine] define Directory for git files
+ BDir_Data_System_dckr_imgs_lin_en_alpine="${BDir_Data_System_dckr_imgs_lin_en}/alpine"         ###_ DIR_To_CHECK
+ 
+ #|# [BDir_Data_System_dckr_imgs_lin_en_specifics] define Directory for git files
+ BDir_Data_System_dckr_imgs_lin_en_specifics="${BDir_Data_System_dckr_imgs_lin_en}/specifics"   ###_ DIR_To_CHECK  
+
+############### Stack_TRACE_BUILDER ################
+Function_PATH="$( dirname ${Function_PATH} )"
+#################################################### 
+}
+
+
+# Sourcing control variable 
+ConfigState="OK" 

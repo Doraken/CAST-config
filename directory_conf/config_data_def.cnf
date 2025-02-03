@@ -1,0 +1,61 @@
+#!/bin/bash 
+############################################################
+# Author       : Arnaud Crampet
+# Version      : 1.0
+# Description  : 
+# This script manages Azure resource groups with a focus on 
+# defining main directories for various data files within 
+# the CAST platform.
+# 
+# Usage        :
+#   - Modify the base directory paths according to your setup.
+#   - Execute the script to set up data definitions directories.
+#
+# Notes        :
+#   - Ensure that all necessary environment variables and dependencies 
+#     are correctly set before running this script.
+#
+# Disclaimer   :
+#   - Use at your own risk. Always review scripts before executing.
+############################################################
+
+
+
+function set_path_data_defs ()
+{   
+############ STACK_TRACE_BUILDER #####################
+Function_Name="${FUNCNAME[0]}"
+Function_PATH="${Function_PATH}/${Function_Name}"
+######################################################
+
+    #|# [BDir_Data_Definitioninition] define Main directory for data files plateforme def
+    BDir_Data_Definitioninition="${Base_Dir_Data}/definitions" ###_ DIR_To_CHECK_TMP
+    printf  "${GLB_PRINTCOL_4}" "default data directory set to" ": [" "${Base_Dir_Data}" "]"
+    
+    #|# [BDir_Data_Definitioninition] define Main directory for data files plateforme def
+    BDir_Data_Definitioninition_Web="${BDir_Data_Definitioninition}/web" ###_ DIR_To_CHECK_TMP
+    printf  "${GLB_PRINTCOL_4}" "default data directory set to" ": [" "${Base_Dir_Data}" "]"
+
+    #|# [BDir_Data_Templates_sql] define Directory for SQL templates
+    BDir_Data_Definitioninition_sql="${BDir_Data_Definitioninition}/sql" ###_ DIR_To_CHECK
+    
+    #|# [BDir_Data_Templates_xml] define Directory for XML templates
+    BDir_Data_Definitioninition_xml="${BDir_Data_Definitioninition}/xml" ###_ DIR_To_CHECK
+ 
+    #|# [BDir_Data_Templates_html] define Directory for HTML templates
+    BDir_Data_Definitioninition_html="${BDir_Data_Definitioninition}/html" ###_ DIR_To_CHECK
+    
+    #|# [BDir_Data_Templates_mail] define Directory for email templates
+    BDir_Data_Definitioninition_mail="${BDir_Data_Definitioninition}/mail" ###_ DIR_To_CHECK
+
+    #|# [BDir_Data_Definition_pf] define Directory for specific platform definitions
+    BDir_Data_Definition_pf="${BDir_Data_Definitioninition}/pf" ###_ DIR_To_CHECK
+
+############### Stack_TRACE_BUILDER ################
+Function_PATH="$( dirname ${Function_PATH} )"
+#################################################### 
+}
+
+
+# Sourcing control variable 
+ConfigState="OK"  

@@ -1,0 +1,109 @@
+#!/bin/bash 
+################################################################################
+# Script Name:    set_path_data_plateformes.sh
+# Description:    This script sets default directories for platform data,
+#                 administration, and infrastructure.
+# Author:         Arnaud Crampet 
+# Version:        1.0
+#
+# Usage:          ./set_path_data_plateformes.sh
+# 
+# Notes:          Ensure that all directory base paths like Base_Dir_Data and
+#                 BDir_Data_Definition are set before running this script.
+#                 The script uses auxiliary functions to configure directories
+#                 for administration and infrastructure settings.
+#
+# Functions:    
+#   - set_path_data_plateformes: Sets up the main data directories for platforms.
+#   - set_path_data_plateformes_administration: Configures directories for 
+#     administration-related data files.
+#   - set_path_data_plateformes_infrastructure: Configures directories for 
+#     infrastructure-related data files.
+#
+# Variables:
+#   - ConfigState: Indicator for configuration status, set to "OK" upon success.
+#
+# Known Issues:   
+#   - Double-check variable names for typos such as BDir_Data_Definitioninition.
+#
+#
+################################################################################
+
+
+
+function set_path_data_plateformes ()
+{
+############ STACK_TRACE_BUILDER #####################
+Function_Name="${FUNCNAME[0]}"
+Function_PATH="${Function_PATH}/${Function_Name}"
+######################################################
+
+    #|# [BDir_Data_Plateformes] define Directory for git files
+    BDir_Data_Plateformes="${Base_Dir_Data}/plateformes"                              ###_ DIR_To_CHECK
+
+    #|# [BDir_Data_Plateformes_admin] define Directory for git files
+    BDir_Data_Plateformes_admin="${BDir_Data_Plateformes}/administration"        ###_ DIR_To_CHECK
+    
+    printf  "${GLB_PRINTCOL_4}" "loading default data  directory" ": [" "plateformes administration directory" "]"
+    set_path_data_plateformes_administration
+    
+    #|# [BDir_Data_Plateformes_admin] define Directory for git files
+    BDir_Data_Plateformes_Infrastruture="${BDir_Data_Plateformes}/infrastructure" ###_ DIR_To_CHECK
+
+    printf  "${GLB_PRINTCOL_4}" "loading default data  directory" ": [" "plateformes infrastructure directory" "]"
+    set_path_data_plateformes_infrastructure
+
+############### Stack_TRACE_BUILDER ################
+Function_PATH="$( dirname ${Function_PATH} )"
+#################################################### 
+}
+
+
+function set_path_data_plateformes_administration ()
+{
+############ STACK_TRACE_BUILDER #####################
+Function_Name="${FUNCNAME[0]}"
+Function_PATH="${Function_PATH}/${Function_Name}"
+######################################################
+
+     #|# [BDir_Data_Plateformes_Admin_Ansible] define Main directory for data files plateforme def
+    BDir_Data_Plateformes_Admin_Ansible="${BDir_Data_Definitioninition}/ansible"         ###_ DIR_To_CHECK_TMP
+ 
+     #|# [BDir_Data_Plateformes_Admin_Ansible] define Main directory for data files plateforme def
+    BDir_Data_Plateformes_Admin_Expect="${BDir_Data_Definitioninition}/expect"           ###_ DIR_To_CHECK_TMP
+ 
+     #|# [BDir_Data_Plateformes_Admin_Ansible] define Main directory for data files plateforme def
+    BDir_Data_Plateformes_Admin_Kestra="${BDir_Data_Definitioninition}/kestra"           ###_ DIR_To_CHECK_TMP
+ 
+############### Stack_TRACE_BUILDER ################
+Function_PATH="$( dirname ${Function_PATH} )"
+#################################################### 
+}
+
+function set_path_data_plateformes_infrastructure ()
+{
+############ STACK_TRACE_BUILDER #####################
+Function_Name="${FUNCNAME[0]}"
+Function_PATH="${Function_PATH}/${Function_Name}"
+######################################################
+
+    #|# [BDir_Data_Plateformes_Infrastruture_Azure] define Main directory for data files plateforme cloud azure
+    BDir_Data_Plateformes_Infrastruture_Azure="${BDir_Data_Plateformes_Infrastruture}/azure"     ###_ DIR_To_CHECK_TMP
+    
+    #|# [BDir_Data_Plateformes_Infrastruture_Onprem] define Main directory for data files plateforme on premise 
+    BDir_Data_Plateformes_Infrastruture_Onprem="${BDir_Data_Plateformes_Infrastruture}/onprem"    ###_ DIR_To_CHECK_TMP
+ 
+    #|# [BDir_Data_Plateformes_Infrastruture_Amazon] define Main directory for data files plateforme cloud amazon
+    BDir_Data_Plateformes_Infrastruture_Amazon="${BDir_Data_Plateformes_Infrastruture}/amazon"    ###_ DIR_To_CHECK_TMP
+ 
+    #|# [BDir_Data_Plateformes_Infrastruture_gcp] define Main directory for data files plateforme cloud google
+    BDir_Data_Plateformes_Infrastruture_gcp="${BDir_Data_Plateformes_Infrastruture}/gcp"          ###_ DIR_To_CHECK_TMP
+     
+############### Stack_TRACE_BUILDER ################
+Function_PATH="$( dirname ${Function_PATH} )"
+#################################################### 
+}
+
+
+# Sourcing control variable 
+ConfigState="OK" 
